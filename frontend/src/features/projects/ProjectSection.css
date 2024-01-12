@@ -1,0 +1,71 @@
+.project-section {
+	padding: 10px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.project-section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.add-project-btn {
+	cursor: pointer;
+}
+
+.project-list {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.project {
+	padding: 5px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+
+.project:hover {
+	background: #eee;
+}
+
+.edit-project-li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.edit-project-input {
+	padding: 5px;
+}
+
+.project-btns {
+	display: flex;
+	gap: 5px;
+}
+
+.project-btn {
+	cursor: pointer;
+}
+
+.del-btn,
+.cancel-edit-btn {
+	color: red;
+}
+
+.update-btn {
+	color: green;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+	background: #eee;
+}

@@ -51,7 +51,7 @@ const ProfileScreen = () => {
                 
         <div className="form-row">
 					<label>Name</label>
-					<input 
+					<input  
 						type="text" 
 						placeholder="Enter First Name..." 
 						value={name} 

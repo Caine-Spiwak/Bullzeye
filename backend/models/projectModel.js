@@ -10,7 +10,6 @@ const projectSchema = mongoose.Schema({
     type: String,
     required: [true, 'Please add a name value']
   },
-  isActive: {type: Boolean, default: true},
   tasks: [{
       name: String,
       description: String,

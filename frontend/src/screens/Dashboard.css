@@ -6,4 +6,13 @@
 .sidebar {
 	height: 100vh;
 	border: 1px solid black;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.profile-section {
+	border: 1px solid black;
+	padding: 10px;
 }

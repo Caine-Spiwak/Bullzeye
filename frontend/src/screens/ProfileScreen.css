@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container {
+    margin: auto;
+    max-width: 1000px;
+    border: 1px solid black;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-title {
+    margin: auto
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+input {
+    padding: 5px
+}
+
+label {
+    font-weight: 600;
+}
+
+button {
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.logout-btn {
+    border: 1px solid rgb(244, 73, 25);
+}
+
+.back-btn {
+    width: 100%;
+    padding: 3px;
+}

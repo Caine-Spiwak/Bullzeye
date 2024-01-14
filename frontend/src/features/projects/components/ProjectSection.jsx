@@ -23,7 +23,6 @@ const ProjectSection = () => {
   const handleCreateProject = async () => {
     const res = await createProject({ name: newProjectName, userId: userInfo._id })
     dispatch(setActiveProject(res.data._id))
-    console.log(res)
     setNewProjectName('')
   }
 
@@ -56,7 +55,7 @@ const ProjectSection = () => {
 			<hr></hr>
 			<p>Projects</p>
 			<ul className='project-list'>
-				{projects.map((project) => (
+				{projects.map((project) => ( 
 					<li key={project._id}>
 						{project._id !== editProjectId ? (
 							<Project project={project} setEditProjectId={setEditProjectId}/>

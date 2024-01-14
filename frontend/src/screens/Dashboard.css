@@ -16,3 +16,14 @@
 	border: 1px solid black;
 	padding: 10px;
 }
+
+.content {
+	height: 100vh;
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+}
+
+li {
+  list-style: none;
+}

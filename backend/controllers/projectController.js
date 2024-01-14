@@ -9,7 +9,7 @@ const getProjects = asyncHandler(async (req, res) => {
 
 	const projects = await Project.find({ userId: userId })
 
-  	res.status(200).json(projects)
+  res.status(200).json(projects)
 })
 
 // @desc		Create a Project
@@ -34,6 +34,7 @@ const setProject = asyncHandler(async (req, res) => {
 // @access 	Private
 const updateProject = asyncHandler(async (req, res) => {
 	const projectId = req.body.projectId
+	
 	const data = {
 		name: req.body.name,
 		isActive: req.body.isActive

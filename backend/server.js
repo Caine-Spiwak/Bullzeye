@@ -7,6 +7,7 @@ import connectDB from './config/db.js';
 const port = process.env.PORT || 5555;
 import userRoutes from './routes/userRoutes.js'
 import projectRoutes from './routes/projectRoutes.js'
+import taskRoutes from './routes/taskRoutes.js'
 import { protect } from './middleware/authMiddleware.js'
 
 connectDB();
@@ -20,6 +21,7 @@ app.use(cookieParser())
 
 app.use('/api/users', userRoutes);
 app.use('/api/projects', protect, projectRoutes)
+app.use('/api/tasks', protect, taskRoutes)
 
 app.get('/', (req, res) => res.send('Server is ready'));
 

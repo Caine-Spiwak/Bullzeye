@@ -1,9 +1,12 @@
 import '../TaskSection.css'
 import { BiEdit } from "react-icons/bi"
+import { IoIosAdd } from "react-icons/io";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useSelector } from "react-redux"
 import { useGetTasksQuery, useCreateTaskMutation, useUpdateTaskMutation, useDeleteTaskMutation } from "../../../slices/tasksApiSlice"
+import { useCreateTodoMutation } from '../../../slices/todosApiSlice'
 import { useState } from "react"
+import TodoSection from '../../todos/components/TodoSection';
 
 
 
@@ -19,7 +22,6 @@ const TaskSection = () => {
   const [editDesc, setEditDesc] = useState('')
   const [editDescId, setEditDescId] = useState('')
 
-  const [nameHoveringId, setNameHoveringId] = useState('')
   const [descHoveringId, setDescHoveringId] = useState('')
 
   // Query & Mutations 
@@ -27,11 +29,16 @@ const TaskSection = () => {
   const [ createTask ] = useCreateTaskMutation()
   const [ updateTask ] = useUpdateTaskMutation()
   const [ deleteTask ] = useDeleteTaskMutation()
+  const [ createTodo ] = useCreateTodoMutation()
 	
   // API Call Functions
-  const handleCreateProject = async () => {
+  const handleCreateTask = async () => {
     await createTask({ projectId: activeProjectId, name: newTaskName})
     setNewTaskName('')
+  }
+
+  const handleCreateTodo = async (taskId) => {
+    await createTodo({ projectId: activeProjectId, taskId: taskId})
   }
 
   const handleEditTaskName = async () => {
@@ -77,7 +84,7 @@ const TaskSection = () => {
         </input>
         <button 
           type="button"
-          onClick={ handleCreateProject }
+          onClick={ handleCreateTask }
         >
           Add Task
         </button>
@@ -92,16 +99,14 @@ const TaskSection = () => {
             <div className='task-content'>
               {task._id !== editTaskNameId ? (
                 <div 
-                  className='task-name'
-                  onMouseEnter={() => setNameHoveringId(task._id)}
-                  onMouseLeave={() => setNameHoveringId('')}
+                  className='task-header'
                 >
-                  <div>{task.name}</div>
-                  <BiEdit 
-                    className={`edit-task-name-btn ${task._id === nameHoveringId ? '' : 'hidden' }`}
-                    onClick={() => setEditTaskNameId(task._id)}
+                  <div 
+                    className='task-name'
+                    onDoubleClick={() => setEditTaskNameId(task._id)}
                   >
-                  </BiEdit>
+                    {task.name}
+                  </div>
                 </div>
               ) : (
                 <input
@@ -136,7 +141,7 @@ const TaskSection = () => {
                 >
                 </textarea>
               )}
-              <div className='todo-list'></div>
+              <TodoSection task={task} taskId={task._id}/>
             </div>
             <div className='task-control'>
               <AiOutlineDelete
@@ -144,6 +149,11 @@ const TaskSection = () => {
                 onClick={() => handleDeleteTask(task._id)}
               >
               </AiOutlineDelete>
+              <IoIosAdd
+                className='add-todo-btn'
+                onClick={() => handleCreateTodo(task._id)}
+              >
+              </IoIosAdd>
             </div>
           </li>
         ))}

@@ -39,21 +39,15 @@ const ProjectSection = () => {
 		<div className="project-section">
 			<div className="project-section-header">
 				<input 
+					className='new-project-input'
 					placeholder="New Project Name"
 					value={newProjectName}
 					onChange={(e) => setNewProjectName(e.target.value)}
 					onKeyDown={(e) => {if (e.key === 'Enter') handleCreateProject()}}
 				>
 				</input>
-				<button 
-					className='add-project-btn'
-					onClick={ handleCreateProject }
-				>
-					+
-				</button>
 			</div>
 			<hr></hr>
-			<p>Projects</p>
 			<ul className='project-list'>
 				{projects.map((project) => ( 
 					<li key={project._id}>

@@ -1,4 +1,4 @@
-import { MdOutlineCancel, MdCheckCircleOutline } from "react-icons/md"
+import { MdOutlineCancel } from "react-icons/md"
 import { useUpdateProjectMutation } from "../../../slices/projectsApiSlice"
 import { useState } from "react"
 
@@ -31,13 +31,8 @@ const ProjectEdit = ({project, setEditProjectId}) => {
 			>
 			</input>
 			<div className="project-btns">
-				<MdCheckCircleOutline 
-					className='project-btn update-btn'
-					onClick={() => handleUpdateProject(project._id)}
-					
-				/>
 				<MdOutlineCancel 
-					className='project-btn cancel-edit-btn'
+					className='cancel-edit-btn'
 					onClick={() => setEditProjectId('') && setEditProjectName('')}
 				/>
 			</div>

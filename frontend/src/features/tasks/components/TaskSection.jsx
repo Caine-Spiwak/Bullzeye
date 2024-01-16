@@ -1,15 +1,13 @@
 import '../TaskSection.css'
-import { BiEdit } from "react-icons/bi"
 import { IoIosAdd } from "react-icons/io";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useSelector } from "react-redux"
 import { useGetTasksQuery, useCreateTaskMutation, useUpdateTaskMutation, useDeleteTaskMutation } from "../../../slices/tasksApiSlice"
 import { useCreateTodoMutation } from '../../../slices/todosApiSlice'
-import { useState } from "react"
 import TodoSection from '../../todos/components/TodoSection';
-
-
-
+import { useState } from 'react';
+import TaskDescription from './TaskDescription';
+import TaskDescriptionEdit from './TaskDescriptionEdit';
 
 
 const TaskSection = () => {
@@ -18,11 +16,7 @@ const TaskSection = () => {
   const [newTaskName, setNewTaskName] = useState('')
   const [editTaskName, setEditTaskName] = useState('')
   const [editTaskNameId, setEditTaskNameId] = useState('')
-
-  const [editDesc, setEditDesc] = useState('')
   const [editDescId, setEditDescId] = useState('')
-
-  const [descHoveringId, setDescHoveringId] = useState('')
 
   // Query & Mutations 
   const { data: tasks, isLoading, error } = useGetTasksQuery(activeProjectId)
@@ -52,17 +46,6 @@ const TaskSection = () => {
     setEditTaskName('')
   }
 
-  const handleEditTaskDesc = async () => {
-    const data = {
-      projectId: activeProjectId,
-      taskId: editDescId,
-      description: editDesc
-    }
-    await updateTask(data)
-    setEditDescId('')
-    setEditDesc('')
-  }
-
   const handleDeleteTask = async (taskId) => {
     const data = {
       projectId: activeProjectId,
@@ -77,18 +60,16 @@ const TaskSection = () => {
     <div className="task-section">
       <div className="task-section-header">
         <input
+          className='new-task-input'
           placeholder="New Task Name"
           value={newTaskName}
           onChange={(e) => setNewTaskName(e.target.value)}
+          onKeyDown={(e) => {if (e.key === 'Enter') handleCreateTask()}}
+          onBlur={() => setNewTaskName('')}
         >
         </input>
-        <button 
-          type="button"
-          onClick={ handleCreateTask }
-        >
-          Add Task
-        </button>
       </div>
+      <hr className='task-header-hr'></hr>
       <ul className="task-list">
         {tasks.length < 1 && <p>No Tasks</p>}
         {tasks.map((task, index) => (
@@ -109,37 +90,29 @@ const TaskSection = () => {
                   </div>
                 </div>
               ) : (
-                <input
-                  defaultValue={task.name}
-                  onChange={(e) => setEditTaskName(e.target.value)}
-                  onKeyDown={(e) => {if (e.key === 'Enter') handleEditTaskName()}}
-                  onBlur={() => setEditTaskNameId('')}
-                  autoFocus
-                >
-                </input>
+                <div className="task-header">
+                  <input
+                    className='edit-task-name-input'
+                    defaultValue={task.name}
+                    onChange={(e) => setEditTaskName(e.target.value)}
+                    onKeyDown={(e) => {if (e.key === 'Enter') handleEditTaskName()}}
+                    onBlur={() => setEditTaskNameId('')}
+                    autoFocus
+                  >
+                  </input>
+                </div>
               )}
               {task._id !== editDescId ? (
-                <div 
-                  className='task-description'
-                  onMouseEnter={() => setDescHoveringId(task._id)}
-                  onMouseLeave={() => setDescHoveringId('')}
-                >
-                  {task.description}
-                <BiEdit
-                  className={`edit-task-description-btn ${task._id === descHoveringId ? '' : 'hidden' }`}
-                  onClick={() => setEditDescId(task._id)}
-                >
-                </BiEdit>
-              </div>
+                <TaskDescription 
+                  task={task} 
+                  setEditDescId={setEditDescId}
+                />
               ) : (
-                <textarea
-                defaultValue={task.description}
-                onChange={(e) => setEditDesc(e.target.value)}
-                onKeyDown={(e) => {if (e.key === 'Enter') handleEditTaskDesc()}}
-                onBlur={() => setEditDescId('')}
-                autoFocus
-                >
-                </textarea>
+                <TaskDescriptionEdit 
+                  task={task}
+                  editDescId={editDescId}
+                  setEditDescId={setEditDescId}
+                />
               )}
               <TodoSection task={task} taskId={task._id}/>
             </div>

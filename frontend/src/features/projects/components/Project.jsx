@@ -1,5 +1,3 @@
-
-import { BiEdit } from "react-icons/bi"
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState } from "react";
 import { removeActiveProject, setActiveProject} from '../../../slices/activeProjectSlice.js'
@@ -28,16 +26,12 @@ const Project = ({project, setEditProjectId}) => {
 		<div
 			className={`project ${project._id === activeProjectId ? "active" : ""}`}
 			onClick={() => dispatch(setActiveProject(project._id))}
+			onDoubleClick={() => setEditProjectId(project._id)}
 			onMouseEnter={() => setIsHovering(project._id)}
 			onMouseLeave={() => setIsHovering(null)}
 		>
 			{project.name}
 			<div className={`project-btns ${isHovering === project._id ? "" : "hidden"}`}>
-				<BiEdit
-					className='project-btn'
-					onClick={() => setEditProjectId(project._id)}
-				>
-				</BiEdit>
 				<AiOutlineDelete
 					className='project-btn del-btn'
 					onClick={() => handleDeleteProject(project._id) }

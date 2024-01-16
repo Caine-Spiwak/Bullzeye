@@ -1,10 +1,33 @@
 .task-section {
   height: 100vh;
-  width: 50vw;
-  border: 1px solid black;
+  width: 40vw;
+  /* border: 1px solid black; */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Task Header */
+
+.task-section-header {
+  display: flex;
+}
+
+.new-task-input {
+  width: 26ch;
+  border: none;
+  text-align: center;
+}
+
+.task-header-hr {
+  width: 22ch;
+}
+
+/* Task List */
+
 .task-list {
+  width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -13,7 +36,7 @@
 
 .task {
   display: flex;
-  border: 1px solid black;
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, .2);
   border-radius: 7px;
 }
 
@@ -54,31 +77,53 @@
 .task-header {
   width: 100%;
   margin-top: 5px;
-  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.task-name {
-  position: relative;
-}
+/* .task-name {
+  padding: 1px;
+} */
 
-.edit-task-name-btn {
-  position: absolute;
-  cursor: pointer;
+.edit-task-name-input {
+  padding: inherit;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  text-align: center;
 }
 
 .task-description {
+  background: #eee;
   position: relative;
-  padding: 7px;
+  /* padding: 7px; */
   padding-right: 25px;
   border-radius: 7px;
-  /* min-height: 20px; */
   width: 100%;
-  background: #eee;
+
   display: flex;
   align-items: center;
+  font-size: .85rem;
+  line-height: 1rem;
+  height: auto;
+}
+
+.task-description-text {
+  padding: 10px;
+}
+
+.task-description-input {
+  background: #eee;
+  position: relative;
+  border-radius: 7px;
+  outline: none;
+  border: none;
+  width: 100%;
+  line-height: 1rem;
+  font-size: .85rem;
+  resize: none;
+  padding: 10px;
 }
 
 .edit-task-description-btn {
@@ -89,6 +134,11 @@
 
 .del-task-btn {
   cursor: pointer;
+}
+
+.task-icon {
+  width: 13px;
+  height: auto;
 }
 
 /* TODOS */

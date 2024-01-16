@@ -10,7 +10,8 @@ const Dashboard = () => {
       <div className="sidebar">
         <ProjectSection />
         <div className='profile-section'>
-          <Link to='/profile'>Profile</Link>
+          <hr />
+          <Link className='profile-link' to='/profile'>Profile</Link>
         </div>
       </div>  
       <div className="content">
